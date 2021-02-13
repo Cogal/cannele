@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Cannelés Clicker</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      var force = 0.5;
+
+      function plus() {
+        if (force > 1) {
+          document.getElementById("plus").setAttribute("disabled", "disabled");
+        } else {
+          force = force + 0.1;
+          mario.volume = force;
+          document.getElementById("moins").removeAttribute("disabled");
+        }
+      }
+
+      function moins() {
+        if (force < 0) {
+          document.getElementById("moins").setAttribute("disabled", "disabled");
+        } else {
+          force = force - 0.1;
+          mario.volume = force;
+          document.getElementById("plus").removeAttribute("disabled");
+        }
+      }
+
+      var mario = new Audio("son2.mp3");
+      mario.play();
+      mario.volume = force;
+
+      var nb = 0;
+      var four = 1;
+
+      function cuisiner() {
+        nb = nb + four;
+
+        document.getElementById("result").innerHTML = nb;
+
+        if (nb < prix) {
+          document
+            .getElementById("b_four")
+            .setAttribute("disabled", "disabled");
+        } else {
+          document.getElementById("b_four").removeAttribute("disabled");
+        }
+
+        var audio = new Audio("son.mp3");
+        audio.play();
+        audio.volume = 0.5;
+      }
+
+      var prix = 25;
+
+      function upgrade() {
+        nb = nb - prix;
+        four = four + 1;
+
+        document.getElementById("result").innerHTML = nb;
+        document.getElementById("nb_four").innerHTML = four;
+
+        if (nb < prix) {
+          document
+            .getElementById("b_four")
+            .setAttribute("disabled", "disabled");
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div style="margin: 0.5%;">
+      <div style="position: absolute; right: 3%;">
+        <input type="button" value="Diminuer" id="moins" onclick="moins()" />
+        <input type="button" value="Augmenter" id="plus " onclick="plus()" />
+      </div>
+
+      <h2 style="font-family: 'Pacifico', cursive; color: #5f021f;">
+        Cannelés Clicker
+      </h2>
+
+      <div>
+        <img src="caneles.jpg" style="width: 100%;" />
+      </div>
+
+      <br />
+
+      <p style="font-family: Neucha;">
+        Vous avez <span style="color: #a47;" id="result">0</span> cannelés
+      </p>
+
+      <p style="font-family: Neucha;">
+        Vous avez <span style="color: #a47;" id="nb_four">1</span> Four
+      </p>
+
+      <input
+        type="button"
+        value="Cuisiner"
+        style="font-family: Neucha;"
+        onclick="cuisiner()"
+      />
+
+      <input
+        id="b_four"
+        type="button"
+        value="Acheter un four (25 cannelés)"
+        style="font-family: Neucha;"
+        disabled
+        onclick="upgrade()"
+      />
+
+      <br />
+
+      <p style="text-align: center; font-style: italic; font-family: Neucha;">
+        Le magasin est en construction
+      </p>
+    </div>
+  </body>
+</html>
